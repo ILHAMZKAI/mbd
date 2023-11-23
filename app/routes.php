@@ -50,4 +50,5 @@ return function (App $app) {
     $app->get('/log_perubahan_produk/{id}', 'App\Controller\LogController:getLogById');
     $app->delete('/log_perubahan_produk/{id}', 'App\Controller\LogController:deleteLogById');
     $app->delete('/log_perubahan_produk', 'App\Controller\LogController:deleteAllLog');
+
 };
