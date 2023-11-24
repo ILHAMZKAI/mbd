@@ -98,4 +98,30 @@ class ProdukController
 
         return $response->withHeader("Content-Type", "application/json");
     }
+
+    public function viewAll(Request $request, Response $response, $args)
+    {
+        $query = $this->db->query('SELECT * FROM UserListAndTotalPurchases');
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $response->getBody()->write(json_encode($results));
+        return $response->withHeader("Content-Type", "application/json");
+    }
+    public function viewById(Request $request, Response $response, $args)
+    {
+        $id = $args['id'];
+
+        $query = $this->db->prepare('SELECT * FROM UserListAndTotalPurchases WHERE id_pengguna = :id');
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $response->getBody()->write(json_encode($result));
+            return $response->withHeader("Content-Type", "application/json");
+        } else {
+            return $response->withHeader("Content-Type", "application/json");
+        }
+    }
 }

@@ -17,6 +17,9 @@ require 'controllers/LogController.php';
 
 return function (App $app) {
 
+    $app->get('/userlistandtotalpurchases', 'App\Controller\ProdukController:viewAll');
+    $app->get('/userlistandtotalpurchases/{id}', 'App\Controller\ProdukController:viewById');
+
     //CRUD TABEL PRODUK
     $app->post('/produk', 'App\Controller\ProdukController:addProduk');
     $app->get('/produk', 'App\Controller\ProdukController:getAllProduk');
